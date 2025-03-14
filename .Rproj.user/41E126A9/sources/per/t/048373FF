@@ -3,7 +3,7 @@
     "path": "~/GitHub/mmease/README.Rmd",
     "project_path": "README.Rmd",
     "type": "r_markdown",
-    "hash": "2468017599",
+    "hash": "3893225224",
     "contents": "",
     "dirty": false,
     "created": 1741934525850.0,
@@ -11,14 +11,16 @@
     "relative_order": 1,
     "properties": {
         "source_window_id": "",
-        "Source": "Source"
+        "Source": "Source",
+        "cursorPosition": "26,60",
+        "scrollLine": "6"
     },
     "folds": "",
-    "lastKnownWriteTime": 1741933416,
+    "lastKnownWriteTime": 1741935211,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1741933416,
+    "last_content_update": 1741935211428,
     "read_only": false,
     "read_only_alternatives": []
 }
