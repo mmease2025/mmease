@@ -1,0 +1,34 @@
+Package: mmease
+Type: Package
+Title: mmease provides a unique online service of whole analytical workflow of single-cell metabolomics.
+Version: 1.0.0
+Author: c(
+    person(given = "Qingxia", family = "Yang", email = "yangqx@zju.edu.cn", role = c("aut"))
+    )
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: mmease provides entire analytical workflow of single-cell metabolomics from bulk metabolomics. Specifically, mmease can (a) provide the most comprehensive workflow for enabling data processing, (b) realize systematical analytical functions for both metabolic heterogeneity and functional heterogeneity.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+Depends: 
+    R (>= 3.5)
+Imports: 
+    multtest,
+    mixOmics,
+    e1071,
+    adabag,
+    C50,
+    pROC,
+    kknn,
+    MASS,
+    AUC,
+    multiROC,
+    caret,
+    mlbench,
+    dummies,
+    randomForest,
+    metabolomics,
+    ropls,
+    varSelRF,
+    magrittr
