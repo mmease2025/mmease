@@ -108,90 +108,45 @@ filted_data <- filtering(data,Percent of Missing Values)
 Data Imputation
 
 ``` r
-imputed_data <- imputation(filted_data, method = "1/5 of minimum positive value")
-imputed_data <- imputation(filted_data, method = "KNN")
+imputed_data <- imputation(data, method = "KNN")
+#The method can be either 1/5 of minimum positive value or KNN.
 ```
 
 Data Transformation
 
 ``` r
-transformed_data <- transformation(imputed_data, method = "G-log")
-transformed_data <- transformation(imputed_data, method = "Log2")
-transformed_data <- transformation(imputed_data, method = "Log10")
+transformed_data <- transformation(data, method = "G-log")
+#The method can be log2 or log10 or G-log.
 ```
 
 Data normalization
 
 ``` r
-normalized_data <- normalization(transformed_data, method = "Auto Scaling")
-normalized_data <- normalization(transformed_data, method = "Mean")
-normalized_data <- normalization(transformed_data, method = "Median")
-normalized_data <- normalization(transformed_data, method = "MSTUS")
-normalized_data <- normalization(transformed_data, method = "SIS")
+normalized_data <- normalization(data, method = "Auto Scaling")
+#The method can be Auto Scaling or Mean or Median or MSTUS or SIS.
 ```
 
 Batch correction
 
 ``` r
-corrected_data <- batch_correction(normalized_data, method = "ComBat")
-corrected_data <- batch_correction(normalized_data, method = "Limma")
+corrected_data <- batch_correction(data, method = "ComBat")
+#The method can be ComBat or Limma.
 ```
 
 DifferentialAnalysis
 
 ``` r
-#Functional analysis
-functional_table <- functional_differential(corrected_data,method = "t_test")
-functional_table <- functional_differential(corrected_data,method = "ANOVA")
-functional_table <- functional_differential(corrected_data,method = "FC")
-functional_table <- functional_differential(corrected_data,method = "PLS-DA")
-functional_table <- functional_differential(corrected_data,method = "OPLS-DA")
-functional_table <- functional_differential(corrected_data,method = "RF_RFE")
-functional_table <- functional_differential(corrected_data,method = "Kruskal_Wallis")
-functional_table <- functional_differential(corrected_data,method = "svmrfeFeatureRanking")
 
-
-#Metabolic analysis
-metabolic_table <- metabolic_differential(corrected_data,method = "t_test")
-metabolic_table <- metabolic_differential(corrected_data,method = "ANOVA")
-metabolic_table <- metabolic_differential(corrected_data,method = "FC")
-metabolic_table <- metabolic_differential(corrected_data,method = "PLS-DA")
-metabolic_table <- metabolic_differential(corrected_data,method = "OPLS-DA")
-metabolic_table <- metabolic_differential(corrected_data,method = "RF_RFE")
-metabolic_table <- metabolic_differential(corrected_data,method = "Kruskal_Wallis")
-metabolic_table <- metabolic_differential(corrected_data,method = "svmrfeFeatureRanking")
+table <- differential(data,label_col = 3,method = "t_test")
+#The method can be t_test", "ANOVA", "FC", "PLS-DA", "OPLS-DA", "RF_RFE", "Kruskal_Wallis", "svmrfeFeatureRanking".
+#If you want Functional analysis, label_col=2, if you want Metabolic analysis, label_col=3.
 ```
 
 Classification model
 
 ``` r
-#Functional analysis
-functional_class <- functional_classification(corrected_data,method = "AdaBoost")
-functional_class <- functional_classification(corrected_data,method = "Bagging")
-functional_class <- functional_classification(corrected_data,method = "Decision Trees")
-functional_class <- functional_classification(corrected_data,method = "K-Nearest Neighbor")
-functional_class <- functional_classification(corrected_data,method = "Linear Discriminat Analysis")
-functional_class <- functional_classification(corrected_data,method = "Naive Bayes")
-functional_class <- functional_classification(corrected_data,method = "Partial Least Squares")
-functional_class <- functional_classification(corrected_data,method = "Random Forest")
-functional_class <- functional_classification(corrected_data,method = "Support Vector Machine")
-
-
-#Metabolic analysis
-metabolic_class <- metabolic_classification(corrected_data,method = "AdaBoost")
-metabolic_class <- metabolic_classification(corrected_data,method = "Bagging")
-metabolic_class <- metabolic_classification(corrected_data,method = "Decision Trees")
-metabolic_class <- metabolic_classification(corrected_data,method = "K-Nearest Neighbor")
-metabolic_class <- metabolic_classification(corrected_data,method = "Linear Discriminat Analysis")
-metabolic_class <- metabolic_classification(corrected_data,method = "Naive Bayes")
-metabolic_class <- metabolic_classification(corrected_data,method = "Partial Least Squares")
-metabolic_class <- metabolic_classification(corrected_data,method = "Random Forest")
-metabolic_class <- metabolic_classification(corrected_data,method = "Support Vector Machine")
-```
-
-Plot model
-
-``` r
-
-plots <- classification_plots(functional_class)
+class <- classification(data,label_col = 3,method = "AdaBoost")
+#The method can be "AdaBoost", "Bagging", "Decision Trees", "K-Nearest Neighbor", "Naive Bayes", "Linear Discriminat Analysis", "Random Forest", "Support Vector Machine".
+#If you want Functional analysis, label_col=2, if you want Metabolic analysis, label_col=3.
+plots <- classification_plots(class)
 ```

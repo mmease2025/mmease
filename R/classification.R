@@ -11,10 +11,11 @@
 
 #'Functional_classification
 #'
-#' @param data Matrix of preprocessed single-cell metabolomics data
-#' @param labels A vector of class labels corresponding to each row in the `data` matrix. These labels should represent the different classes or groups for the classification task.
 #' @param folds The number of folds to use for cross - validation. Default is 5, which means the data will be split into 5 subsets for cross - validation purposes.
+#' @param data2 Matrix of preprocessed single-cell metabolomics data
+#' @param label_col A vector indicating the group labels (e.g., 0 and 1) for each sample in the data, used to distinguish different groups for the statistical test.
 #' @param method The classification method to be used. Valid options include "AdaBoost", "Bagging", "Decision Trees", etc.
+#'
 #' @return A list containing two elements. The first element is a data frame with the true and predicted labels for each fold of the cross - validation. The second element is a data frame with the top 10 most important features (as determined by the selected classification method) for each fold.
 #' @export
 #' @examples
@@ -26,7 +27,7 @@
 #'
 #'
 #'
-functional_classification <- function(data2, labels, folds = 5, method) {
+classification <- function(data2, label_col, folds = 5, method) {
 
   library(adabag)
   library(C50)
@@ -42,7 +43,7 @@ functional_classification <- function(data2, labels, folds = 5, method) {
   library(randomForest)
 
 
-  labels <- factor(data2[,2])
+  labels <- as.factor(data2[, label_col])
   data <- apply(data2[, -c(1:4)], 2, as.numeric)
   data4 <- data2[, 1:4]
 
@@ -275,40 +276,35 @@ functional_classification <- function(data2, labels, folds = 5, method) {
     final_res[[1]] <- final_df_m
     final_res[[2]] <- imports
     return(final_res)
-  } else if (method == "Partial Least Squares") {
+  } else if (method == "Linear Discriminat Analysis") {
     set.seed(10)
     final_res <- list()
     data_label <- cbind(labels, data)
-    x <- data_label[, -1]
+    x <- data_label
     y <- factor(data_label[, 1])
-    test.fold <- split(sample(1:length(labels)), 1:folds)
-
+    colnames(x)[1] <- "labels"
+    test.fold <- split(sample(1:length(labels)), 1:folds) #ignore warning
     for (mm in 1:folds) {
       test <- test.fold[[mm]]
       train_df <- x[-test, ]
       test_df <- x[test, ]
-
-      plsFit <- train(y ~ ., data = data.frame(train_df, y = y[-test]), method = "pls", preProc = c("center", "scale"), tuneLength = 15)
-      plsProbs <- predict(plsFit, newdata = test_df, type = "prob")
-
-      colnames(plsProbs) <- paste0(colnames(plsProbs), "_pred_SVM")
-
+      ld <- lda(labels~., train_df)
+      z_pred <- predict(ld, test_df)
       true_label <- dummies::dummy(test_df$labels, sep = ".")
       true_label <- data.frame(true_label)
       colnames(true_label) <- gsub(".*?\\.", "", colnames(true_label))
       colnames(true_label) <- paste0(colnames(true_label), "_true")
-
-      final_df_2 <- cbind(true_label, plsProbs)
+      pred_label <- z_pred$posterior
+      colnames(pred_label) <- gsub("true", "pred_SVM", colnames(true_label))
+      pred_label_s <- t(sapply(1:dim(pred_label)[1], function(i) ifelse(pred_label[i, ] == max(pred_label[i, ]), 1, 0)))
+      final_df_2 <- cbind(true_label, pred_label_s)
       final_df2_t <- t(final_df_2)
       final_df2_t_la <- rownames(final_df2_t)
-      final_df2_t_c <- as.data.frame(cbind(final_df2_t_la,final_df2_t))
-
-      import_raw <- varImp(plsFit)
-      import_f <- apply(as.data.frame(import_raw$importance), 1, mean)
+      final_df2_t_c <- as.data.frame(cbind(final_df2_t_la, final_df2_t))
+      import_f <- ld$scaling[, 1]
       import_s <- import_f[order(import_f, decreasing = T)][1:10]
-      import_a <- as.data.frame(cbind(row.names(t(t(import_s))),t(t(import_s))))
+      import_a <- as.data.frame(cbind(row.names(t(t(import_s))), t(t(import_s))))
       colnames(import_a) <- c("V1", paste0("V_", mm))
-
       if (mm == 1) {
         final_df_m <- final_df2_t_c
         imports <- import_a
