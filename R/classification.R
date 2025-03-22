@@ -277,6 +277,7 @@ classification <- function(data2, label_col, folds = 5, method) {
     final_res[[2]] <- imports
     return(final_res)
   } else if (method == "Linear Discriminat Analysis") {
+    data <- data2[, -c(1:4)]
     set.seed(10)
     final_res <- list()
     data_label <- cbind(labels, data)
