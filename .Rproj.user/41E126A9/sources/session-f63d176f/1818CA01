@@ -1,14 +1,14 @@
 {
-    "id": "54D7D760",
+    "id": "1818CA01",
     "path": "~/GitHub/mmease/vignettes/mmease.Rmd",
     "project_path": "vignettes/mmease.Rmd",
     "type": "r_markdown",
-    "hash": "3460279550",
+    "hash": "0",
     "contents": "",
     "dirty": false,
-    "created": 1743485956582.0,
+    "created": 1743487058119.0,
     "source_on_save": false,
-    "relative_order": 2,
+    "relative_order": 1,
     "properties": {
         "source_window_id": "",
         "Source": "Source",
@@ -16,11 +16,11 @@
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1743485956,
+    "lastKnownWriteTime": 1743487058,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1743485956,
+    "last_content_update": 1743487058,
     "read_only": false,
     "read_only_alternatives": []
 }
