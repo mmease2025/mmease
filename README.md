@@ -80,7 +80,7 @@ if (!requireNamespace("devtools", quietly = TRUE))
     install.packages("devtools")
 library(devtools)
 
-devtools::install_github("mmease2025/mmease"，build_vignettes = TRUE)
+devtools::install_github("mmease2025/mmease",build_vignettes = TRUE)
 ```
 
 ## Example Data
