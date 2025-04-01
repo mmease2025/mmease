@@ -5,6 +5,7 @@ Version: 1.0.0
 Author: c(
     person(given = "Qingxia", family = "Yang", email = "yangqx@zju.edu.cn", role = c("aut"))
     )
+Maintainer: Qingxia Yang <yangqx@zju.edu.cn>
 Description: mmease provides entire analytical workflow of single-cell metabolomics from bulk metabolomics. Specifically, mmease can (a) provide the most comprehensive workflow for enabling data processing, (b) realize systematical analytical functions for both metabolic heterogeneity and functional heterogeneity.
 License: MIT + file LICENSE
 Encoding: UTF-8

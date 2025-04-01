@@ -1,7 +1,7 @@
 #'Filtering
 #'
 #' @param data Single-cell metabolomics data matrix
-#' @param percentage
+#' @param percentage Percent of Missing Values
 #'
 #' @return Filtered single-cell metabolomics data matrix
 #' @export

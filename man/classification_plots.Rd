@@ -10,7 +10,7 @@ classification_plots(final_res_output)
 \item{final_res_output}{}
 }
 \value{
-AUCplot and ROCplot
+Receiver operating characteristic (ROC) curve and area under the curve (AUC) value
 }
 \description{
 Classification_plots

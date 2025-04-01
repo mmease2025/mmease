@@ -9,7 +9,7 @@ filtering(data, percentage)
 \arguments{
 \item{data}{Single-cell metabolomics data matrix}
 
-\item{percentage}{}
+\item{percentage}{Percent of Missing Values}
 }
 \value{
 Filtered single-cell metabolomics data matrix

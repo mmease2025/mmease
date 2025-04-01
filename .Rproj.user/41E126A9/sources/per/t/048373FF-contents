@@ -145,7 +145,7 @@ DifferentialAnalysis
 
 ``` {r DifferentialAnalysis,eval = FALSE}
 
-table <- differential(data,label_col = 3,method = "t_test")
+marker <- differential(data,label_col = 3,method = "t_test")
 #The method can be t_test", "ANOVA", "FC", "PLS-DA", "OPLS-DA", "RF_RFE", "Kruskal_Wallis", "svmrfeFeatureRanking".
 #If you want Functional analysis, label_col=2, if you want Metabolic analysis, label_col=3.
 ```
