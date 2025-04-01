@@ -81,6 +81,8 @@ if (!requireNamespace("devtools", quietly = TRUE))
 library(devtools)
 
 devtools::install_github("mmease2025/mmease",build_vignettes = TRUE)
+
+library(mmease)
 ```
 
 ## Example Data
